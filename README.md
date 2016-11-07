@@ -27,22 +27,22 @@
 	* `sudo apt-get update`
 	*`sudo apt-get upgrade`
 
-6. Change the SSH port from 22 to 2200
+6. Change the `ssh` port from 22 to 2200
 	* Changed the file `/etc/ssh/sshd_config` as sudo. The lines changed were `Port 22` to `Port 2200`
 	* Restarted ssh with `sudo service ssh restart`.
 
-6b. Changed
-	*On a local virtual machine applied 'ssh_keygen' to generate private and public key. Selected `1R7p9` as a passprase. Next entered server as grader (`ssh -p 2200 grader@35.162.181.90`). In home directory
-	* mkdir .ssh
-	* touch .ssh/authorized_key
+6b. Enforced key-based `ssh` authentication
+	*On a local virtual machine applied `ssh_keygen` to generate private and public key. Selected `1R7p9` as a passprase. Next entered server as grader (`ssh -p 2200 grader@35.162.181.90`). 
+	* `mkdir ~/.ssh`
+	* `touch .ssh/authorized_key`
 	* Exited the server with `exit`
-	* Entered as root. Copied the public key to ~/.ssh/authorized_key
+	* Entered as `root`. Copied the public key to `~/.ssh/authorized_key`
 	* Copied the key to the grader: `cp .ssh/authorized_key /home/grader/.ssh/authorized_key`
 	* Changed the line `PasswordAuthentication yes` to `PasswordAuthentication no`.
-	* Restarted ssh with `sudo service ssh restart`.
+	* Restarted `ssh` with `sudo service ssh restart`.
 	* Disabled root login by deleting the `/root/.ssh` directory. 
 
-	After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
+After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
 
 
 7. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
@@ -63,8 +63,7 @@
 		*`sudo apt-get install libapache2-mod-wsgi` and `sudo vim /var/www/html/index.html`
 		* `sudo vim /etc/apache2/sites-enabled/000-default.conf` added `WSGIScriptAlias / /var/www/html/myapp.wsgi`
 		* `sudo apache2ctl restart`
-		* `sudo vim /var/www/html/catalog.wsgi
-`
+		* `sudo vim /var/www/html/catalog.wsgi`
 		* Added the code to the `catalog.wsgi` file.
 		```python
     	def application(environ, start_response):

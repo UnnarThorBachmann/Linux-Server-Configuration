@@ -31,7 +31,7 @@
 	* Changed the file `/etc/ssh/sshd_config` as sudo. The lines changed were `Port 22` to `Port 2200`
 	* Restarted ssh with `sudo service ssh restart`.
 
-6b. Enforced key-based `ssh` authentication
+7. Enforced key-based `ssh` authentication
 	* On a local virtual machine applied `ssh_keygen` to generate private and public key. Selected `1R7p9` as a passprase. Next entered server as grader (`ssh -p 2200 grader@35.162.181.90`). 
 	* `mkdir ~/.ssh`
 	* `touch .ssh/authorized_key`
@@ -45,17 +45,17 @@
 After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
 
 
-7. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+8. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 	* `sudo ufw default deny incoming`
 	* `sudo ufw default allow outgoing`
 	* `sudo ufw allow 2200`
 	* `sudo ufw allow www`
 	* `sudo ufw allow ntp`
 
-8. Configure the local timezone to UTC
+9. Configure the local timezone to UTC
 	*As sudo wrote `sudo dpkg-reconfigure tzdata` in the - selecting the option `None of the above` and then `UTC`. [See](http://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt).
 
-9. Install and configure Apache to serve a Python mod_wsgi application
+10. Install and configure Apache to serve a Python mod_wsgi application
 	* Logged in as `grader`: 
 	* `sudo apt-get install apache2`
 	* The apache server can now be reache by entering `http://35.162.181.90:80` in a browser.

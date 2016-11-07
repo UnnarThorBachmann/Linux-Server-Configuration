@@ -32,7 +32,7 @@
 	* Restarted ssh with `sudo service ssh restart`.
 
 6b. Enforced key-based `ssh` authentication
-	*On a local virtual machine applied `ssh_keygen` to generate private and public key. Selected `1R7p9` as a passprase. Next entered server as grader (`ssh -p 2200 grader@35.162.181.90`). 
+	* On a local virtual machine applied `ssh_keygen` to generate private and public key. Selected `1R7p9` as a passprase. Next entered server as grader (`ssh -p 2200 grader@35.162.181.90`). 
 	* `mkdir ~/.ssh`
 	* `touch .ssh/authorized_key`
 	* Exited the server with `exit`

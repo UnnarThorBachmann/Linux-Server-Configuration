@@ -42,7 +42,7 @@
 	* Restarted `ssh` with `sudo service ssh restart`.
 	* Disabled root login by deleting the `/root/.ssh` directory. 
 
-After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
+	After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
 
 
 8. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)

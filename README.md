@@ -20,7 +20,7 @@
 
 4. Giving `grader` the permission to sudo upon entering password.
 	* `vim /etc/sudoers.d/grader`
-	* Changing the second line of the file to `grader All=(ALL) PASSWD:ALL`
+	* Adding to the file: `grader All=(ALL) PASSWD:ALL`
 
 5. Updating all currently installed packages
 	* `ssh -p 22 grader@35.162.181.90`
@@ -44,7 +44,6 @@
 
 	After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
 
-
 8. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 	* `sudo ufw default deny incoming`
 	* `sudo ufw default allow outgoing`
@@ -56,7 +55,7 @@
 	*As sudo wrote `sudo dpkg-reconfigure tzdata` in the - selecting the option `None of the above` and then `UTC`. [See](http://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt).
 
 10. Install and configure Apache to serve a Python mod_wsgi application
-	* Logged in as `grader`: 
+	* Logged in as `grader`. 
 	* `sudo apt-get install apache2`
 	* The apache server can now be reache by entering `http://35.162.181.90:80` in a browser.
 	* Configured the Apache server to handle WSGI requests: 
@@ -68,11 +67,31 @@
 		```python
     	def application(environ, start_response):
     		status = '200 OK'
-    		output = 'Hello World!'
+    		output = 'WSGI up and running'
 
     		response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
     		start_response(status, response_headers)
 
     		return [output]
 		```
+11. Install and configure PostgreSQL:
+	* Logged in as `grader`.
+	* Installed a server locally ` sudo apt-get install postgresql postgresql-contrib
+`.
+	* `sudo adduser catalog`
+	* Chose password `y8z074i`
+	* `cp /etc/sudoers.d/grader /etc/sudoers.d/catalog`
+	* Adding to the second file: `catalog All=(ALL) PASSWD:ALL`
+	* sudo vim /etc/ssh/sshd_config
+	* Changed the line `PasswordAuthentication no` to `PasswordAuthentication yes` in order to be able to access the server as grader temporarily.
+	* Restarted ssh with `sudo service ssh restart`.
+	* As user `catalog`:
+	* `sudo -u postgres createuser --superuser $USER`
+    * `sudo -u postgres psql`
+    * `sudo -u postgres createdb $USER`
+    * `sudo -u postgres createuser -D -A -P catalog`
+	* `sudo -u postgres createdb -O catalog catalogdb`
+	* `sudo /etc/init.d/postgresql reload`
+	
+12. Install git, clone and setup your Catalog App project (from your GitHub repository from earlier in the Nanodegree program) so that it functions correctly when visiting your server’s IP address in a browser. Remember to set this up appropriately so that your .git directory is not publicly accessible via a browser!
 ##

@@ -61,6 +61,7 @@
 	* Configured the Apache server to handle WSGI requests: 
 		*`sudo apt-get install libapache2-mod-wsgi python-dev` and `sudo a2enmod wsgi`
 		* Changed `/etc/apache2/sites-enabled/000-default.conf`
+		
 			<VirtualHost *:80>
         		ServerName ec2-35-162-181-90.us-west-2.compute.amazonaws.com
         		ServerAdmin webmaster@localhost

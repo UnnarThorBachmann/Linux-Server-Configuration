@@ -1,8 +1,44 @@
+November 2016
+
 # Linux-Server-Configuration
 
+This is a project done by Unnar Thor Bachmann in the Udacity's full-stack-developer course.
 
+## How to gain access to the server.
+	* Clone this repository.
+	* Open the folder in a unix shell.
+	* Type `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90`
+	* As passphrase type `1R7p9`.
+
+## How to run the webpage
+	* Open the url `http://ec2-35-162-181-90.us-west-2.compute.amazonaws.com/`
+	* Or `http://35.162.181.90/` (ip address 35.162.181.90).
+
+## Third party resources
+
+	* [How to deplay a flask application](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps).
+	* [How to change timezone on Ubuntu](http://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt).
+	* [How to set up postgresql on ubuntu](https://help.ubuntu.com/community/PostgreSQL).
+	* [An Udacity Forum on modules needed to run the Flask application](https://discussions.udacity.com/t/importerror-no-module-named-psycopg2-project5/35018/5)
+	* [The Flask webpage](http://flask.pocoo.org/)
 
 ## Software installed
+
+	* Ubuntu packages (`sudo apt-get install`):
+		* `apache2`
+		* `libapache2-mod-wsgi python-dev`
+		* `postgresql-client``
+		* `postgresql postgresql-contrib`
+		* `git`
+		* `python-pip`
+
+	* Python modules (`sudo pip install`)
+		* `httplib2`
+    	* `Flask `
+    	* `python-psycopg2`
+    	* `sqlalchemy`
+    	* `Flask-SQLAlchemy`
+    	* `--upgrade oauth2client`
 
 
 ## Configurations made
@@ -61,7 +97,7 @@
 	* Configured the Apache server to handle WSGI requests: 
 		*`sudo apt-get install libapache2-mod-wsgi python-dev` and `sudo a2enmod wsgi`
 		* Changed `/etc/apache2/sites-enabled/000-default.conf`
-		
+
 			<VirtualHost *:80>
         		ServerName ec2-35-162-181-90.us-west-2.compute.amazonaws.com
         		ServerAdmin webmaster@localhost
@@ -124,11 +160,12 @@
     ``` 
     * Rand `python database_setup.py` and `python AddingToDatabase.py`
     * Made efforts to run `project.py` and installed modules when needed. I also found [this forum](https://discussions.udacity.com/t/importerror-no-module-named-psycopg2-project5/35018/5) useful
-    * `sudo apt-get install python-pip `
-    * `sudo pip install Flask `
-    * `sudo apt-get install python-psycopg2`
-    * `sudo pip install sqlalchemy`
-    * `sudo pip install Flask-SQLAlchemy`
+    	* `sudo apt-get install python-pip `
+    	* `sudo pip install Flask `
+    	* `sudo apt-get install python-psycopg2`
+    	* `sudo pip install sqlalchemy`
+    	* `sudo pip install Flask-SQLAlchemy`
+    	* `sudo pip install --upgrade oauth2client`
     * When debugging regularly read `/var/log/apache2/error.log`
     * Added `http://ec2-35-162-181-90.us-west-2.compute.amazonaws.com/` as a valid OAuth redirect URL on facebook-developers. 
 

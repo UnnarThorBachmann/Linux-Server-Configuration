@@ -74,9 +74,12 @@ This is a project done by Unnar Thor Bachmann in the Udacity's full-stack-develo
 	* Exited the server with `exit`
 	* Entered as `root`. Copied the public key to `~/.ssh/authorized_key`
 	* Copied the key to the grader: `cp .ssh/authorized_key /home/grader/.ssh/authorized_key`
-	* Changed the line `PasswordAuthentication yes` to `PasswordAuthentication no`.
-	* Restarted `ssh` with `sudo service ssh restart`.
-	* Disabled root login by deleting the `/root/.ssh` directory. 
+	* Configured `/etc/ssh/sshd_config`
+		* Changed the line `PasswordAuthentication yes` to `PasswordAuthentication no`.
+		* Changed `PermitRootLogin without-password` to `PermitRootLogin no`
+		* Restarted `ssh` with `sudo service ssh restart`.
+	* Deleted the `/root/.ssh` directory. 
+	
 
 	After these steps it the only possible way to log in with ssh is with the command `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90` and the passprase `1R7p9`
 

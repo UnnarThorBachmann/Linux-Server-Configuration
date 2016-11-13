@@ -5,22 +5,22 @@ November 2016
 This is a project done by Unnar Thor Bachmann in the Udacity's full-stack-developer course.
 
 ## How to gain access to the server.
-	* Clone this repository.
-	* Open the folder in a unix shell.
-	* Type `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90`
-	* As passphrase type `1R7p9`.
+* Clone this repository.
+* Open the folder in a unix shell.
+* Type `ssh -p 2200 -i .ssh/udacity_key grader@35.162.181.90`
+* As passphrase type `1R7p9`.
 
 ## How to run the webpage
-	* Open the url `http://ec2-35-162-181-90.us-west-2.compute.amazonaws.com/`
-	* Or `http://35.162.181.90/` (ip address 35.162.181.90).
+* Open the url `http://ec2-35-162-181-90.us-west-2.compute.amazonaws.com/`
+* Or `http://35.162.181.90/` (ip address 35.162.181.90).
 
-## Third party resources
+## Third Party Resources
 
-	* [How to deplay a flask application](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps).
-	* [How to change timezone on Ubuntu](http://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt).
-	* [How to set up postgresql on ubuntu](https://help.ubuntu.com/community/PostgreSQL).
-	* [An Udacity Forum on modules needed to run the Flask application](https://discussions.udacity.com/t/importerror-no-module-named-psycopg2-project5/35018/5)
-	* [The Flask webpage](http://flask.pocoo.org/)
+* [How to deplay a flask application](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps).
+* [How to change timezone on Ubuntu](http://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt).
+* [How to set up postgresql on ubuntu](https://help.ubuntu.com/community/PostgreSQL).
+* [An Udacity Forum on modules needed to run the Flask application](https://discussions.udacity.com/t/importerror-no-module-named-psycopg2-project5/35018/5)
+* [The Flask webpage](http://flask.pocoo.org/)
 
 ## Software installed
 

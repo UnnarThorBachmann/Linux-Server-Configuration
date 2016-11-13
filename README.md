@@ -92,6 +92,18 @@
     * `sudo -u postgres createuser -D -A -P catalog`
 	* `sudo -u postgres createdb -O catalog catalogdb`
 	* `sudo /etc/init.d/postgresql reload`
-	
-12. Install git, clone and setup your Catalog App project (from your GitHub repository from earlier in the Nanodegree program) so that it functions correctly when visiting your server’s IP address in a browser. Remember to set this up appropriately so that your .git directory is not publicly accessible via a browser!
+	* `sudo apt-get update`
+    * `sudo apt-get install git`
+    * `git init`
+    * `git clone https://github.com/UnnarThorBachmann/Item-catalog.git`
+    * `sudo apt-get install python-pip `
+    * `sudo pip install Flask `
+    * `sudo apt-get install python-psycopg2`
+    * `sudo pip install sqlalchemy`
+    * `sudo pip install Flask-SQLAlchemy`
+    * `sudo pip install psycopg2`
+    * `python database_setup.py`
+
+12. Install git, clone and setup your Catalog App project. 
+
 ##

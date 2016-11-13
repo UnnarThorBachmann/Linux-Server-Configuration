@@ -24,21 +24,21 @@ This is a project done by Unnar Thor Bachmann in the Udacity's full-stack-develo
 
 ## Software installed
 
-	* Ubuntu packages (`sudo apt-get install`):
-		* `apache2`
-		* `libapache2-mod-wsgi python-dev`
-		* `postgresql-client``
-		* `postgresql postgresql-contrib`
-		* `git`
-		* `python-pip`
+* Ubuntu packages (`sudo apt-get install`):
+	* `apache2`
+	* `libapache2-mod-wsgi python-dev`
+	* `postgresql-client``
+	* `postgresql postgresql-contrib`
+	* `git`
+	* `python-pip`
 
-	* Python modules (`sudo pip install`)
-		* `httplib2`
-    	* `Flask `
-    	* `python-psycopg2`
-    	* `sqlalchemy`
-    	* `Flask-SQLAlchemy`
-    	* `--upgrade oauth2client`
+* Python modules (`sudo pip install`)
+	* `httplib2`
+    * `Flask `
+    * `python-psycopg2`
+    * `sqlalchemy`
+    * `Flask-SQLAlchemy`
+    * `--upgrade oauth2client`
 
 
 ## Configurations made

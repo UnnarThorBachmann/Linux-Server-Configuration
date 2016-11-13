@@ -57,53 +57,77 @@
 10. Install and configure Apache to serve a Python mod_wsgi application
 	* Logged in as `grader`. 
 	* `sudo apt-get install apache2`
-	* The apache server can now be reache by entering `http://35.162.181.90:80` in a browser.
+	* The apache server can now be reache by entering `http://35.162.181.90:80` or `http://ec2-35-162-181-90.us-west-2.compute.amazonaws.com/` in a browser.
 	* Configured the Apache server to handle WSGI requests: 
-		*`sudo apt-get install libapache2-mod-wsgi` and `sudo vim /var/www/html/index.html`
-		* `sudo vim /etc/apache2/sites-enabled/000-default.conf` added `WSGIScriptAlias / /var/www/html/myapp.wsgi`
+		*`sudo apt-get install libapache2-mod-wsgi python-dev` and `sudo a2enmod wsgi`
+		* Changed `/etc/apache2/sites-enabled/000-default.conf`
+			<VirtualHost *:80>
+        		ServerName ec2-35-162-181-90.us-west-2.compute.amazonaws.com
+        		ServerAdmin webmaster@localhost
+        		DocumentRoot /var/www/html/catalog
+
+		        ErrorLog ${APACHE_LOG_DIR}/error.log
+        		CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        		WSGIDaemonProcess catalog user=catalog group=catalog threads=5
+        		WSGIScriptAlias / /var/www/html/catalog/catalog.wsgi
+        		<Directory /var/www/html/catalog>
+                	WSGIProcessGroup catalog
+                	WSGIApplicationGroup %{GLOBAL}
+                	Order deny,allow
+                	Allow from all
+        		</Directory>
+			</VirtualHost>
+
 		* `sudo apache2ctl restart`
-		* `sudo vim /var/www/html/catalog.wsgi`
+		* `mkdir /var/www/html/catalog`
+		* `sudo vim /var/www/html/catalog/catalog.wsgi`
 		* Added the code to the `catalog.wsgi` file.
 		```python
-    	def application(environ, start_response):
-    		status = '200 OK'
-    		output = 'WSGI up and running'
+    	#!/usr/bin/python
+		import sys
+		import logging
+		logging.basicConfig(stream=sys.stderr)
+		sys.path.insert(0,"/var/www/html/catalog/")
 
-    		response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
-    		start_response(status, response_headers)
-
-    		return [output]
+		from project import app as application
 		```
+		as suggested from [tutorial](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps).
+
+
 11. Install and configure PostgreSQL:
-	* Logged in as `grader`.
-	* Installed a server locally ` sudo apt-get install postgresql postgresql-contrib
-`.
+	* Followed [tutorial](https://help.ubuntu.com/community/PostgreSQL).
+	* Installed a server locally `sudo apt-get install postgresql-client`.
+	* `sudo apt-get install postgresql postgresql-contrib`
 	* `sudo adduser catalog`
-	* Chose password `y8z074i`
-	* `cp /etc/sudoers.d/grader /etc/sudoers.d/catalog`
-	* Adding to the second file: `catalog All=(ALL) PASSWD:ALL`
-	* sudo vim /etc/ssh/sshd_config
-	* Changed the line `PasswordAuthentication no` to `PasswordAuthentication yes` in order to be able to access the server as grader temporarily.
-	* Restarted ssh with `sudo service ssh restart`.
+	* Created user `catalog` with same access rights as `grader`.
 	* As user `catalog`:
-	* `sudo -u postgres createuser --superuser $USER`
-    * `sudo -u postgres psql`
-    * `sudo -u postgres createdb $USER`
     * `sudo -u postgres createuser -D -A -P catalog`
 	* `sudo -u postgres createdb -O catalog catalogdb`
 	* `sudo /etc/init.d/postgresql reload`
+	
+
+12. Install git, clone and setup your Catalog App project. 
+	* Logged in as `catalog`
 	* `sudo apt-get update`
     * `sudo apt-get install git`
     * `git init`
     * `git clone https://github.com/UnnarThorBachmann/Item-catalog.git`
+    * `cp -a /home/catalog/Item-catalog/. /var/www/html/catalog`
+    * Changed all referencs to sqlite database `engine = create_engine('sqlite:///catalog.db')` to `engine = create_engine('postgresql:///catalogdb')`
+    * Changed the final lines of `project.py` to:
+    ```python
+    if __name__ == '__main__':
+   		app.run()
+
+    ``` 
+    * Rand `python database_setup.py` and `python AddingToDatabase.py`
+    * Made efforts to run `project.py` and installed modules when needed. I also found [this forum](https://discussions.udacity.com/t/importerror-no-module-named-psycopg2-project5/35018/5) useful
     * `sudo apt-get install python-pip `
     * `sudo pip install Flask `
     * `sudo apt-get install python-psycopg2`
     * `sudo pip install sqlalchemy`
     * `sudo pip install Flask-SQLAlchemy`
-    * `sudo pip install psycopg2`
-    * `python database_setup.py`
+    * When debugging regularly read `/var/log/apache2/error.log`
+    * Added `http://ec2-35-162-181-90.us-west-2.compute.amazonaws.com/` as a valid OAuth redirect URL on facebook-developers. 
 
-12. Install git, clone and setup your Catalog App project. 
-
-##
